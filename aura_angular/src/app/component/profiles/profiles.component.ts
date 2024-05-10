@@ -83,7 +83,7 @@ export class ProfilesComponent implements OnInit {
 
   // Function to delete a user 
   deleteUsers() {
-    if (confirm('Do you want to delete your account and all your products?')) {
+    if (confirm('Do you want to delete the account and all the products?')) {
 
       //Create variable to put the user id
       const id = {

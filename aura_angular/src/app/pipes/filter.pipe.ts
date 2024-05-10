@@ -14,7 +14,7 @@ export class FilterPipe implements PipeTransform {
      *  This method creates a new array 
      *  containing only the items elements. */
     return items.filter(item => {
-      console.log(item)
+      // console.log(item)
       return item.title.toLowerCase().includes(searchTerm);
     });
   }

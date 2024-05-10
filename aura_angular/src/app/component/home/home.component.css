@@ -1,4 +1,17 @@
+.container {
+    padding: 40px;
+}
 #cart{
     height: 20%;
 }
 
+.container-cards {
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.5s ease, transform 0.5s ease; /* Transición de la sombra y transformación */
+    transform: scale(0.96);
+}
+
+.container-cards:hover {
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8); /* Agrega una sombra más intensa al pasar el mouse sobre el elemento */
+    transform: scale(1.03); /* Escala el elemento a 1.05 veces su tamaño original */
+}

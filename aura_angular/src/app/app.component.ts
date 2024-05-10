@@ -19,7 +19,6 @@ export class AppComponent {
    * @returns boolean
    */
   checkLogin(): boolean{
-    
     if(localStorage.getItem('isLoggedIn') == 'true'){
       this.isLogged = false;
       this.id_user_logged = JSON.parse(localStorage.getItem('actualUser')!);
@@ -47,10 +46,7 @@ export class AppComponent {
     } else {
       return true;
     }
-    
-    
   }
-
 
   /**
    * Sets the icon url in '', puts the localStorage variable "isLoggedIn" in false
@@ -60,5 +56,6 @@ export class AppComponent {
     this.user_icon_url = '';
     localStorage.setItem('isLoggedIn','false'); 
     localStorage.removeItem('actualUser');
+    window.location.reload();
   }
 }
