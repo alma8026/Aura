@@ -64,4 +64,10 @@ export class HomeComponent implements OnInit {
       });
     });
   }
+   /**
+   * Handle if the image doesn't exist anymore
+   */
+   handleImageError(event: any) {
+    event.target.src = '../../../assets/images/no-img-found.png';
+  }
 }

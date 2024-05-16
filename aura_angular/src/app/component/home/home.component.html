@@ -1,88 +1,127 @@
-<div id="div-login" class="px-12">
-  <div class="container mx-auto px-4 mt-28">
+<section class="bg-gradient-to-r from-blue-300 to-blue-500 relative z-0 mt-24 shadow-xl">
+  <div id="wind-line" class="absolute inset-0 z-[-1]"></div>
+  <div class="container mx-auto px-8 md:px-16 lg:px-20 xl:px-24">
+    <div class="flex flex-col lg:flex-row items-center justify-center lg:justify-between">
+      <div id="welcome-text" class="max-w-lg text-center lg:ml-16 lg:text-left lg:mr-10 lg:mb-0 mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 text-shadow text-center">¡Bienvenido a Aura!</h1>
+        <p class="text-lg md:text-xl text-gray-200 mb-6 leading-relaxed text-shadow text-center">Tu lugar para comprar y vender todo tipo de productos de forma fácil y segura.</p>
+        <div class="flex justify-center">
+          <a href="/catalogue" class="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300">Explora nuestros productos</a>
+        </div>
+      </div>
+      <div class="hidden lg:block w-1/2 md:ml-10">
+        <img id="welcome-img" src="../../../assets/images/welcome-image.jpg" alt="Welcome Image" class="w-full rounded-lg shadow-xl">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="div-login" class="md:px-12">
+  <div class="container mx-auto px-4">
 
     <!-- Juegos -->
-    <h1 class="text-4xl mb-5">Games</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-5">
-      <div *ngFor="let product of fourGames" class="container-cards p-9 bg-white rounded-2xl overflow-hidden">
-        <div [routerLink]="['/product-profile', product.id]" class="cursor-pointer flex justify-center items-center">
-          <img class="rounded-xl h-56 object-cover" src="{{ product.img }}" alt="{{ product.title }}">
-        </div>
-        <div class="flex justify-between items-center mt-8">
-          <div class="flex-1 pr-1 md:pr-2">
-            <h2 class="text-xl font-semibold">{{ product.title }}</h2>
-            <p class="font-bold text-xl mt-4">{{ product.price }}€</p>
+    <h1 id="game-prod-title" class="text-4xl mb-5">Games</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-12">
+      <div *ngFor="let product of fourGames" class="card-container rounded-lg bg-white overflow-hidden">
+        <a [routerLink]="['/product-profile', product.id]" class="block cursor-pointer">
+          <div class="relative overflow-hidden">
+            <img *ngIf="product && product.img" class="object-cover w-full h-48 md:h-56 xl:h-64" src="{{ product.img }}" alt="{{ product.title }}" (error)="handleImageError($event)">
+            <img *ngIf="!product || !product.img" class="object-cover w-full h-48 md:h-56 xl:h-64" src="../../../assets/images/no-img-found.png" alt="Image not found">
           </div>
-          <button [routerLink]="['/chat', product.user_id]" class="text-white font-semibold bg-blue-400 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform hover:scale-110 mb-auto">Contact Owner</button>
-        </div>
+        </a>
+          <div class="p-4 md:p-6 flex flex-col justify-between">
+            <div class="py-2">
+              <h2 class="text-xl font-semibold mb-2">{{ product.title }}</h2>
+              <p class="text-gray-700 mb-2 md:mb-4 leading-snug h-12 overflow-auto">{{ product.description }}</p>
+              <p class="text-lg font-bold">{{ product.price }}€</p>
+            </div>
+            <button [routerLink]="['/chat', product.user_id]" class="text-white font-semibold bg-blue-500 py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 self-start md:self-end">Contact Owner</button>
+          </div>
+        
       </div>
     </div>
 
     <!-- Coches -->
     <h1 class="text-4xl mb-5">Cars</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-5">
-      <div *ngFor="let product of fourCars" class="container-cards p-9 bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300">
-        <div [routerLink]="['/product-profile', product.id]" class="cursor-pointer flex justify-center items-center">
-          <img class="rounded-xl h-56 object-cover" src="{{ product.img }}" alt="{{ product.title }}">
-        </div>
-        <div class="flex justify-between items-center mt-5">
-          <div class="flex-1 pr-1 md:pr-2">
-            <h2 class="text-xl font-semibold">{{ product.title }}</h2>
-            <p class="font-bold text-xl mt-4">{{ product.price }}€</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-12">
+      <div *ngFor="let product of fourCars" class="card-container rounded-lg bg-white shadow-md overflow-hidden">
+        <a [routerLink]="['/product-profile', product.id]" class="block cursor-pointer">
+          <div class="relative overflow-hidden">
+            <img *ngIf="product && product.img" class="object-cover w-full h-48 md:h-56 xl:h-64" src="{{ product.img }}" alt="{{ product.title }}" (error)="handleImageError($event)">
+            <img *ngIf="!product || !product.img" class="object-cover w-full h-48 md:h-56 xl:h-64" src="../../../assets/images/no-img-found.png" alt="Image not found">
           </div>
-          <button [routerLink]="['/chat', product.user_id]" class="text-white font-semibold bg-blue-400 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform hover:scale-110 mb-auto">Contact Owner</button>
-        </div>
+        </a>
+          <div class="p-4 md:p-6 flex flex-col justify-between">
+            <div class="py-2">
+              <h2 class="text-xl font-semibold mb-2">{{ product.title }}</h2>
+              <p class="text-gray-700 mb-2 md:mb-4 leading-snug h-12 overflow-auto">{{ product.description }}</p>
+              <p class="text-lg font-bold">{{ product.price }}€</p>
+            </div>
+            <button [routerLink]="['/chat', product.user_id]" class="text-white font-semibold bg-blue-500 py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 self-start md:self-end">Contact Owner</button>
+          </div>
       </div>
     </div>
 
     <!-- Libros -->
     <h1 class="text-4xl mb-5">Books</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-5">
-      <div *ngFor="let product of fourBooks" class="container-cards p-9 bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300">
-        <div [routerLink]="['/product-profile', product.id]" class="cursor-pointer flex justify-center items-center">
-          <img class="rounded-xl h-56 object-cover" src="{{ product.img }}" alt="{{ product.title }}">
-        </div>
-        <div class="flex justify-between items-center mt-5">
-          <div class="flex-1 pr-1 md:pr-2">
-            <h2 class="text-xl font-semibold">{{ product.title }}</h2>
-            <p class="font-bold text-xl mt-4">{{ product.price }}€</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-12">
+      <div *ngFor="let product of fourBooks" class="card-container rounded-lg bg-white shadow-md overflow-hidden">
+        <a [routerLink]="['/product-profile', product.id]" class="block cursor-pointer">
+          <div class="relative overflow-hidden">
+            <img *ngIf="product && product.img" class="object-cover w-full h-48 md:h-56 xl:h-64" src="{{ product.img }}" alt="{{ product.title }}" (error)="handleImageError($event)">
+            <img *ngIf="!product || !product.img" class="object-cover w-full h-48 md:h-56 xl:h-64" src="../../../assets/images/no-img-found.png" alt="Image not found">
           </div>
-          <button [routerLink]="['/chat', product.user_id]" class="text-white font-semibold bg-blue-400 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform hover:scale-110 mb-auto">Contact Owner</button>
-        </div>
+        </a>
+          <div class="p-4 md:p-6 flex flex-col justify-between">
+            <div class="py-2">
+              <h2 class="text-xl font-semibold mb-2">{{ product.title }}</h2>
+              <p class="text-gray-700 mb-2 md:mb-4 leading-snug h-12 overflow-auto">{{ product.description }}</p>
+              <p class="text-lg font-bold">{{ product.price }}€</p>
+            </div>
+            <button [routerLink]="['/chat', product.user_id]" class="text-white font-semibold bg-blue-500 py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 self-start md:self-end">Contact Owner</button>
+          </div>
       </div>
     </div>
 
     <!-- Series -->
     <h1 class="text-4xl mb-5">Series</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-5">
-      <div *ngFor="let product of fourSeries" class="container-cards p-9 bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300">
-        <div [routerLink]="['/product-profile', product.id]" class="cursor-pointer flex justify-center items-center">
-          <img class="rounded-xl h-56 object-cover" src="{{ product.img }}" alt="{{ product.title }}">
-        </div>
-        <div class="flex justify-between items-center mt-5">
-          <div class="flex-1 pr-1 md:pr-2">
-            <h2 class="text-xl font-semibold">{{ product.title }}</h2>
-            <p class="font-bold text-xl mt-4">{{ product.price }}€</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-12">
+      <div *ngFor="let product of fourSeries" class="card-container rounded-lg bg-white shadow-md overflow-hidden">
+        <a [routerLink]="['/product-profile', product.id]" class="block cursor-pointer">
+          <div class="relative overflow-hidden">
+            <img *ngIf="product && product.img" class="object-cover w-full h-48 md:h-56 xl:h-64" src="{{ product.img }}" alt="{{ product.title }}" (error)="handleImageError($event)">
+            <img *ngIf="!product || !product.img" class="object-cover w-full h-48 md:h-56 xl:h-64" src="../../../assets/images/no-img-found.png" alt="Image not found">
           </div>
-          <button [routerLink]="['/chat', product.user_id]" class="text-white font-semibold bg-blue-400 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform hover:scale-110 mb-auto">Contact Owner</button>
-        </div>
+        </a>
+          <div class="p-4 md:p-6 flex flex-col justify-between">
+            <div class="py-2">
+              <h2 class="text-xl font-semibold mb-2">{{ product.title }}</h2>
+              <p class="text-gray-700 mb-2 md:mb-4 leading-snug h-12 overflow-auto">{{ product.description }}</p>
+              <p class="text-lg font-bold">{{ product.price }}€</p>
+            </div>
+            <button [routerLink]="['/chat', product.user_id]" class="text-white font-semibold bg-blue-500 py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 self-start md:self-end">Contact Owner</button>
+          </div>
       </div>
     </div>
 
     <!-- Deportes -->
     <h1 class="text-4xl mb-5">Sports</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-5">
-      <div *ngFor="let product of fourSports" class="container-cards p-9 bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300">
-        <div [routerLink]="['/product-profile', product.id]" class="cursor-pointer flex justify-center items-center">
-          <img class="rounded-xl h-56 object-cover" src="{{ product.img }}" alt="{{ product.title }}">
-        </div>
-        <div class="flex justify-between items-center mt-5">
-          <div class="flex-1 pr-1 md:pr-2">
-            <h2 class="text-xl font-semibold">{{ product.title }}</h2>
-            <p class="font-bold text-xl mt-4">{{ product.price }}€</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-12">
+      <div *ngFor="let product of fourSports" class="card-container rounded-lg bg-white shadow-md overflow-hidden">
+        <a [routerLink]="['/product-profile', product.id]" class="block cursor-pointer">
+          <div class="relative overflow-hidden">
+            <img *ngIf="product && product.img" class="object-cover w-full h-48 md:h-56 xl:h-64" src="{{ product.img }}" alt="{{ product.title }}" (error)="handleImageError($event)">
+            <img *ngIf="!product || !product.img" class="object-cover w-full h-48 md:h-56 xl:h-64" src="../../../assets/images/no-img-found.png" alt="Image not found">
           </div>
-          <button [routerLink]="['/chat', product.user_id]" class="text-white font-semibold bg-blue-400 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform hover:scale-110 mb-auto">Contact Owner</button>
-        </div>
+        </a>
+          <div class="p-4 md:p-6 flex flex-col justify-between">
+            <div class="py-2">
+              <h2 class="text-xl font-semibold mb-2">{{ product.title }}</h2>
+              <p class="text-gray-700 mb-2 md:mb-4 leading-snug h-12 overflow-auto">{{ product.description }}</p>
+              <p class="text-lg font-bold">{{ product.price }}€</p>
+            </div>
+            <button [routerLink]="['/chat', product.user_id]" class="text-white font-semibold bg-blue-500 py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 self-start md:self-end">Contact Owner</button>
+          </div>
       </div>
     </div>
     

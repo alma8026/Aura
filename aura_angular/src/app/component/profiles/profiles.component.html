@@ -1,7 +1,7 @@
-<div *ngIf="selected_user" class="mt-12 max-w-screen-xl mx-auto p-4 mt-32">
+<div *ngIf="selected_user" class="mt-12 p-6 max-w-screen-xl mx-auto mt-32">
   <div class="sm:flex sm:flex-cols-2">
     <div>
-      <a><img class="w-52 h-52 mr-10 rounded-full aspect-square" src="{{selected_user.icon}}"></a>
+      <a><img class="w-52 h-52 mr-10 rounded-full aspect-square object-cover icon-img" src="{{selected_user.icon}}"></a>
     </div>
     <div>
       <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700">
@@ -32,29 +32,25 @@
   </div>
 
   <!--products-->
-  <div class="container xl:columns-3 lg:columns-2 md:columns-2 w-full">
+  <div class="container xl:columns-4 lg:columns-2 md:columns-2 w-full mt-12">
     <div *ngIf="!user_products[0]" class="w-full mt-5">
-      <p class="text-2xl">The user does not have products.</p>
-  </div>
-    <div *ngFor="let product of user_products"
-      class="mx-auto p-9 bg-white max-w-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl mt-5 mb-10 transition duration-300 h-96">
-      <div [routerLink]="['/product-profile', product.id]">
-        <div class="flex justify-center items-center">
-          <img class="rounded-xl h-52 " src="{{ product.img }}" />
-        </div>
-        <div class="flex justify-between items-center">
-          <div class="w-36">
-            <h2 class="mt-5 text-xl font-semibold">{{ product.title }}</h2>
-            <p class="mt-2">{{ product.price }}€</p>
-          </div>
-          <div>
-            <button *ngIf="selected_is_the_same"
-              class="z-0 relative text-white text-md font-semibold bg-blue-400 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform-gpu hover:scale-110"
-              [routerLink]="['/edit-product', product.id]">Edit</button>
-          </div>
-        </div>
-      </div>
+      <p class="text-2xl">El usuario no tiene productos.</p>
     </div>
-    
+    <div *ngFor="let product of user_products" class="card-container rounded-lg bg-white overflow-hidden shadow-md hover:shadow-lg mb-10 transition duration-300">
+      <a [routerLink]="['/product-profile', product.id]" class="block cursor-pointer">
+        <div class="relative overflow-hidden">
+          <img *ngIf="product && product.img" class="object-cover w-full h-48 md:h-56 xl:h-64 rounded-xl" src="{{ product.img }}" alt="{{ product.title }}" (error)="handleImageError($event)">
+          <img *ngIf="!product || !product.img" class="object-cover w-full h-48 md:h-56 xl:h-64 rounded-xl" src="../../../assets/images/no-img-found.png" alt="Image not found">
+        </div>
+        <div class="p-4 md:p-6 flex flex-col justify-between">
+          <div class="py-2">
+            <h2 class="text-xl font-semibold mb-2">{{ product.title }}</h2>
+            <p class="text-gray-700 mb-2 md:mb-4 leading-snug h-12 overflow-auto">{{ product.description }}</p>
+            <p class="text-lg font-bold">{{ product.price }}€</p>
+          </div>
+          <button [routerLink]="['/chat', product.user_id]" class="text-white font-semibold bg-blue-500 py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 self-start md:self-end">Contact Owner</button>
+        </div>
+      </a>
+    </div> 
   </div>
 </div>

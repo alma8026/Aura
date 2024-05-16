@@ -57,6 +57,13 @@ export class ProfilesComponent implements OnInit {
     this.role_user = userLogged.role;
   }
 
+   /**
+   * Handle if the image doesn't exist anymore
+   */
+   handleImageError(event: any) {
+    event.target.src = '../../../assets/images/no-img-found.png';
+  }
+
   /**
    * Function for call likeUsers for service
    */

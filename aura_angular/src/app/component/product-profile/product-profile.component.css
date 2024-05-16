@@ -1,0 +1,43 @@
+.fullscreen-toggle {
+    cursor: pointer;
+  }
+  
+  .fullscreen-checkbox {
+    display: none;
+  }
+  
+  .fullscreen-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .fullscreen-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+  }
+  .fullscreen-close:hover {
+    transform: scale(1.3);
+  }
+  
+  .fullscreen-image {
+    max-width: 95%;
+    max-height: 95%;
+    border-radius: 20px;
+  }
+  
+  #fullscreen-toggle:checked + .fullscreen-toggle + .fullscreen-modal {
+    display: flex;
+  }

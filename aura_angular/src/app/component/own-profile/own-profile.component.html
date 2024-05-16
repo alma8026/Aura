@@ -1,13 +1,13 @@
 <div *ngIf="selected_user" class="mt-12 max-w-screen-xl mx-auto p-4 mt-32">
   <div class="sm:flex sm:flex-cols-2">
     <div>
-      <a><img class="w-52 h-52 mr-10 rounded-full aspect-square" src="{{selected_user.icon}}"></a>
+      <a><img class="w-52 h-52 mr-10 rounded-full aspect-square object-cover icon-img" src="{{selected_user.icon}}" (error)="handleImageError($event)"></a>
     </div>
 
     <div>
       <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700">
         {{selected_user.name}} {{selected_user.lastname}}
-        <button type="button" [routerLink]="['/edit-profile']"><svg class="h-12 w-12 text-blue-500" fill="none"
+        <button class="pencil-icon" type="button" [routerLink]="['/edit-profile']"><svg class="h-12 w-12 text-blue-500" fill="none"
             viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -65,7 +65,7 @@
       class=" mx-auto p-9 bg-white max-w-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl mb-10 transition duration-300 h-96">
       <div>
         <div [routerLink]="['/product-profile', product.id]" class="flex justify-center items-center cursor-pointer">
-          <img class="rounded-xl h-52 " src="{{ product.img }}" />
+          <img class="rounded-xl h-52 " src="{{ product.img }}" (error)="handleImageError($event)"/>
         </div>
         <div class="flex justify-between items-center">
           <div class="w-36">
@@ -122,7 +122,7 @@
             <div>
               <div [routerLink]="['/product-profile', product.id]"
                 class="flex justify-center items-center cursor-pointer">
-                <img class="rounded-xl h-52 " src="{{ product.img }}" />
+                <img class="rounded-xl h-52 " src="{{ product.img }}" (error)="handleImageError($event)"/>
               </div>
               <div class="flex justify-between items-center">
                 <div class="w-full">
@@ -148,7 +148,7 @@
             class="mx-auto p-9 bg-white max-w-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl mb-10 transition duration-300 h-96">
             <div>
               <div [routerLink]="['/profile', user.id]" class="flex justify-center items-center cursor-pointer">
-                <img class="rounded-xl h-52 " src="{{ user.icon }}" />
+                <img class="rounded-xl h-52 " src="{{ user.icon }}" (error)="handleImageError($event)"/>
               </div>
               <div class="flex justify-between items-center">
                 <div class="w-36">
@@ -167,15 +167,21 @@
 <!--chats-->
 <div *ngIf="selected_is_the_same">
   <div *ngIf="chatProfile == true" class="max-w-screen-xl mx-auto mb-5">
-<!-- Chat -->
-    <tr *ngFor="let users of startedChats" class="bg-white border-b hover:bg-gray-50 ">
-      <th [routerLink]="['/chat', users.id]" scope="row"
-        class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
-        <img class="w-10 h-10 rounded-full cursor-pointer" src="{{users.icon}}" alt="Jese image">
-        <div class="pl-3">
-          <div class="text-base font-semibold hover:underline cursor-pointer">{{ users.name }} {{users.lastname}}</div>
-        </div>
-      </th>
-    </tr>
-  </div>
+    <h1 class="text-4xl py-5 text-center">CHATS INICIADOS</h1>
+    <table class="w-full">
+        <tbody>
+            <tr *ngFor="let user of startedChats" class="bg-white border-b hover:bg-gray-50">
+                <td [routerLink]="['/chat', user.id]" class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center cursor-pointer">
+                        <img class="w-16 h-16 rounded-full object-cover" src="{{ user.icon }}" alt="User image" (error)="handleImageError($event)">
+                        <div class="ml-4">
+                            <div class="text-lg font-semibold hover:underline cursor-pointer">{{ user.name }} {{ user.lastname }}</div>
+                            <div class="text-gray-600 text-sm">{{ user.lastMessage }}</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 </div>

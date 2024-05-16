@@ -29,16 +29,20 @@ export class CatalogueComponent implements OnInit {
   });
 
   ngOnInit(): void {
-
     // Take all the products from db
     this.products.getProducts().subscribe((data: Product[]) => {
       this.allProducts = data;
+      this.updateNoProducts();
     });
-
+  
     // Take all the categories from db
     this.categories.getCategories().subscribe((data: any) => {
       this.allCategories = data;
     });
+  }
+  
+  updateNoProducts() {
+    this.noProducts = this.allProducts.length === 0;
   }
 
   /**
@@ -47,6 +51,13 @@ export class CatalogueComponent implements OnInit {
    */
   onPriceRangeChange(priceRange: number[]) {
     this.priceRange = priceRange;
+  }
+
+   /**
+   * Handle if the image doesn't exist anymore
+   */
+   handleImageError(event: any) {
+    event.target.src = '../../../assets/images/no-img-found.png';
   }
 }
 

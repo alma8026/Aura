@@ -27,8 +27,8 @@ class ChatController extends Controller
 
     public function createChat(Request $request){
         $newChat = new StartedChats();
-        $newChat->id_user1 = $request->id_user1;
-        $newChat->id_user2 = $request->id_user2;
+        $newChat->user1 = $request->user1;
+        $newChat->user2 = $request->user2;
         $allChats = StartedChats::all();
 
         foreach ($allChats as $chat) {

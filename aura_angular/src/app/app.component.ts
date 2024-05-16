@@ -58,4 +58,11 @@ export class AppComponent {
     localStorage.removeItem('actualUser');
     window.location.reload();
   }
+
+   /**
+   * Handle if the image doesn't exist anymore
+   */
+   handleImageError(event: any) {
+    event.target.src = '../../../assets/images/no-img-found.png';
+  }
 }

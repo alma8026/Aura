@@ -2,7 +2,7 @@
 
 <nav class="fixed top-0 w-full z-50 border-gray-200 bg-gray-900">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
-  <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+  <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse ml-4 lg:ml-0">
       <img src="../assets/images/aura_logo.png" class="h-24" alt="Flowbite Logo" />
       <span class="self-center text-2xl font-semibold whitespace-nowrap text-white"></span>
   </a>
@@ -38,7 +38,7 @@
   <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
       <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
         <span class="sr-only">Open user menu</span>
-        <img *ngIf="!checkLogin()" id="acc-btn" src="{{this.user_icon_url}}" alt="User Image" class="h-20 w-20 object-cover rounded-full p-1 bg-gray-400">
+        <img *ngIf="!checkLogin()" id="acc-btn" src="{{this.user_icon_url}}" alt="User Image" class="h-24 w-24 object-cover rounded-full p-1 bg-gray-700" (error)="handleImageError($event)">
         <img *ngIf="checkLogin()" id="acc-btn" src="../assets/images/not-logged-icon.png" alt="User Image" class="h-20 w-20 rounded-full p-1 bg-gray-400">
       </button>
       <!-- Dropdown menu -->
@@ -48,9 +48,12 @@
           <span *ngIf="!this.user_info" class="block text-sm text-gray-200">You aren't logged</span>
           <span *ngIf="this.user_info" class="block text-sm  text-gray-200 truncate text-gray-400">{{this.user_info.email}}</span>
         </div>
-        <ul class="py-2" aria-labelledby="user-menu-button">
-          <li *ngIf="this.user_info">
+        <ul *ngIf="this.user_info" class="py-2" aria-labelledby="user-menu-button">
+          <li *ngIf="this.user_info.role != 'admin'">
             <a href="/ownprofile" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-100 hover:bg-gray-600 hover:text-white">Profile</a>
+          </li>
+          <li *ngIf="this.user_info.role == 'admin'">
+            <a href="/profile/" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-100 hover:bg-gray-600 hover:text-white">Profile</a>
           </li>
           <li *ngIf="this.user_info">
             <a href="/edit-profile" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-100 hover:bg-gray-600 hover:text-white">Settings</a>

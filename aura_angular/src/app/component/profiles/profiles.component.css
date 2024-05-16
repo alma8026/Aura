@@ -1,0 +1,10 @@
+.icon-img {
+    border: 4px solid #18181b;
+    box-shadow: 4px 4px 8px black;
+    transition: transform 0.7s ease;
+  }
+
+  .icon-img:hover {
+    transform: scale(1.07);
+    cursor: pointer;
+  }

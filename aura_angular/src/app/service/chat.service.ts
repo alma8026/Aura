@@ -26,6 +26,7 @@ export class ChatService {
    * @return A new chat channel
    */
   startChat(info: any){
+    console.log(info);
     return this.http.post('http://localhost:8000/api/createChat', info);
   }
 

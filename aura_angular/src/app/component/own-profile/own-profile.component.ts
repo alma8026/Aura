@@ -57,6 +57,12 @@ export class OwnProfileComponent implements OnInit {
     this.setAllProfileDataFromUser(this.id_selected_user);
   }
 
+  /**
+   * Handle if the image doesn't exist anymore
+   */
+  handleImageError(event: any) {
+    event.target.src = '../../../assets/images/no-img-found.png';
+  }
 
   /**
    * Saves the like of the product that the user clicks, but if the user is
